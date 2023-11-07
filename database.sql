@@ -82,7 +82,7 @@ SELECT
     grades.interview, 
     grades.theory, 
     grades.practice, 
-    grades.softkill 
+    grades.softSkill 
 FROM 
     candidates 
 LEFT JOIN grades 
@@ -92,8 +92,6 @@ ON candidates.id = grades.id_candidate;
 /*
 	WHEN GET HAS PARAMETERS
 */
-
-
 SELECT 
     candidates.id,
     candidates.name, 
@@ -102,18 +100,17 @@ SELECT
     grades.interview, 
     grades.theory, 
     grades.practice, 
-    grades.softkill 
+    grades.softSkill 
 FROM 
     candidates 
 LEFT JOIN grades 
 ON candidates.id = grades.id_candidate
 WHERE 
-	grades.interview = valor
+	grades.interview >= valor
 AND 
 	grades.theory = valor
-AND 
+OR 
 	grades.practice = valor
-AND 
+OR 
 	grades.softSkill = valor
-
 
