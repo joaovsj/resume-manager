@@ -16,20 +16,36 @@ class Transaction():
 
     def getAll(self):
 
-        cursor.execute("SELECT candidates.id,candidates.name, candidates.telephone,candidates.description, grades.interview as interview, grades.theory, grades.practice, grades.softkill FROM candidates LEFT JOIN grades ON candidates.id = grades.id_candidate")
+        command = "SELECT candidates.id,candidates.name, candidates.telephone,candidates.description, grades.interview as interview, grades.theory, grades.practice, grades.softkill FROM candidates LEFT JOIN grades ON candidates.id = grades.id_candidate"
+        cursor.execute(command)
         dados = cursor.fetchall()
         return dados
 
     def insert(self,name, telephone, description, interview, theory, practice, softkill):        
 
-        command = f"INSERT INTO candidates (name, telephone, description) VALUES ('{name}', '{telephone}', '{description}')"
-        cursor.execute(command)
-        candidate_id = cursor.lastrowid
-        self.save()
+        try: 
 
-        command = f"INSERT INTO grades (interview, theory, practice, softkill, id_candidate) VALUES ('{interview}', '{theory}', '{practice}', '{softkill}', {candidate_id})"
-        cursor.execute(command)
-        self.save()
+            command = f"INSERT INTO candidates (name, telephone, description) VALUES ('{name}', '{telephone}', '{description}')"
+            cursor.execute(command)
+            candidate_id = cursor.lastrowid
+            self.save()
+
+            command = f"INSERT INTO grades (interview, theory, practice, softkill, id_candidate) VALUES ('{interview}', '{theory}', '{practice}', '{softkill}', {candidate_id})"
+            cursor.execute(command)
+            self.save()
+
+        except Error:
+            print("Ocorreu um ao executar a ação") 
+        
+    def select(self, interview, theory, practice, softSkill):
+        
+        try:
+            command = f"SELECT candidates.id,candidates.name, candidates.telephone,candidates.description, grades.interview as interview, grades.theory, grades.practice, grades.softkill FROM candidates LEFT JOIN grades ON candidates.id = grades.id_candidate" 
+            
+        except Error:
+            print("Ocorreu um ao executar a ação") 
+
+
 
     def save(self):
         db_conexao.commit()
