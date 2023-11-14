@@ -1,3 +1,4 @@
+import tkinter as tk
 from mysql.connector import (connection)
 
 
@@ -47,7 +48,100 @@ class Transaction():
         db_conexao.close()
 
 
+# janela = tk.Tk()
+# janela.geometry("500x500")
+# label = tk.Label(janela, text= "Cadastre os candidatos")
+# label.pack(pady=10)
+
+class Screen(Transaction): 
+
+    def firstWindow(self):
+        self.janela = tk.Tk() 
+        self.janela.geometry("500x500")
+        label = tk.Label(self.janela, text= "Cadastre os candidatos")
+        label.pack(pady=10)
 
 
+    def register(self):
+        ###################################################
+        label = tk.Label(self.janela, text= "Nome: ")
+        label.pack(pady=2)
+
+        self.name = tk.Text(self.janela, height = 1, width = 10)
+        self.name.pack(pady=2) 
+
+        ###################################################
+        label = tk.Label(self.janela, text= "Telefone: ")
+        label.pack(pady=2)
+
+        self.telephone = tk.Text(self.janela, height = 1, width = 10)
+        self.telephone.pack(pady=2) 
+
+        ###################################################
+        label = tk.Label(self.janela, text= "Descrição: ")
+        label.pack(pady=2)
+
+        self.description = tk.Text(self.janela, height = 1, width = 10)
+        self.description.pack(pady=2) 
+
+        ###################################################
+        label = tk.Label(self.janela, text= "Prova Intrevista: ")
+        label.pack(pady=2)
+
+        self.interview = tk.Text(self.janela, height = 1, width = 10)
+        self.interview.pack(pady=2) 
+
+
+        ###################################################
+        label = tk.Label(self.janela, text= "Prova Teórica: ")
+        label.pack(pady=2)
+
+        self.theory = tk.Text(self.janela, height = 1, width = 10)
+        self.theory.pack(pady=2) 
+
+
+        ###################################################
+        label = tk.Label(self.janela, text= "Prova Prática: ")
+        label.pack(pady=2)
+
+        self.practice = tk.Text(self.janela, height = 1, width = 10)
+        self.practice.pack(pady=2) 
+
+
+        ###################################################
+        label = tk.Label(self.janela, text= "Prova de Soft Skill: ")
+        label.pack(pady=2)
+
+        self.softSkill = tk.Text(self.janela, height = 1, width = 10)
+        self.softSkill.pack(pady=2) 
+
+
+        botao1 = tk.Button(self.janela, text='Cadastrar', command=self.take_input)
+        botao1.pack(pady=15)
+
+        # botao1 = tk.Button(janela, text='Procurar candidatos', command=searchCandidates)
+        # botao1.pack(pady=15)
+
+    def take_input(self):
+        nameRegister = self.name.get("1.0", "end-1c")
+        telephoneRegister = self.telephone.get("1.0", "end-1c")
+        descriptionRegister = self.description.get("1.0", "end-1c")
+        interviewRegister = self.interview.get("1.0", "end-1c")
+        theoryRegister = self.theory.get("1.0", "end-1c")
+        practiceRegister = self.practice.get("1.0", "end-1c")
+        softSkillRegister = self.softSkill.get("1.0", "end-1c")
+
+
+
+        self.insert(nameRegister, telephoneRegister, descriptionRegister, interviewRegister, theoryRegister, practiceRegister, softSkillRegister)
+        # abrir_janela()
+
+
+    def close(self):
+        self.janela.mainloop()
+
+
+
+    
 
     
