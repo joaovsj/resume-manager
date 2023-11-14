@@ -16,42 +16,36 @@ class Transaction():
 
     def getAll(self):
 
-        command = "SELECT candidates.id,candidates.name, candidates.telephone,candidates.description, grades.interview as interview, grades.theory, grades.practice, grades.softkill FROM candidates LEFT JOIN grades ON candidates.id = grades.id_candidate"
+        command = "SELECT candidates.id,candidates.name, candidates.telephone,candidates.description, grades.interview as interview, grades.theory, grades.practice, grades.softSkill FROM candidates LEFT JOIN grades ON candidates.id = grades.id_candidate"
         cursor.execute(command)
-        dados = cursor.fetchall()
-        return dados
+        data = cursor.fetchall()
+        return data
 
-    def insert(self,name, telephone, description, interview, theory, practice, softkill):        
+    def insert(self,name, telephone, description, interview, theory, practice, softSkill):        
 
-        try: 
+        command = f"INSERT INTO candidates (name, telephone, description) VALUES ('{name}', '{telephone}', '{description}')"
+        cursor.execute(command)
+        candidate_id = cursor.lastrowid
+        self.save()
 
-            command = f"INSERT INTO candidates (name, telephone, description) VALUES ('{name}', '{telephone}', '{description}')"
-            cursor.execute(command)
-            candidate_id = cursor.lastrowid
-            self.save()
-
-            command = f"INSERT INTO grades (interview, theory, practice, softkill, id_candidate) VALUES ('{interview}', '{theory}', '{practice}', '{softkill}', {candidate_id})"
-            cursor.execute(command)
-            self.save()
-
-        except Error:
-            print("Ocorreu um ao executar a ação") 
+        command = f"INSERT INTO grades (interview, theory, practice, softSkill, id_candidate) VALUES ('{interview}', '{theory}', '{practice}', '{softSkill}', {candidate_id})"
+        cursor.execute(command)
+        self.save()
         
     def select(self, interview, theory, practice, softSkill):
         
-        try:
-            command = f"SELECT candidates.id,candidates.name, candidates.telephone,candidates.description, grades.interview as interview, grades.theory, grades.practice, grades.softkill FROM candidates LEFT JOIN grades ON candidates.id = grades.id_candidate" 
+        command = f"SELECT candidates.id, candidates.name, candidates.telephone, candidates.description, grades.interview as interview, grades.theory, grades.practice, grades.softSkill FROM candidates LEFT JOIN grades ON candidates.id = grades.id_candidate" 
+        data = cursor.execute(command)
+        print(data) 
+        exit()
+        return data
             
-        except Error:
-            print("Ocorreu um ao executar a ação") 
-
-
-
     def save(self):
         db_conexao.commit()
     
     def close(self):    
         db_conexao.close()
+
 
 
 

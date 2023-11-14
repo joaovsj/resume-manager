@@ -90,9 +90,9 @@ ON candidates.id = grades.id_candidate;
 
 
 /*
-	WHEN GET HAS PARAMETERS
+	WHEN GET METHOD HAS PARAMETERS
 */
-SELECT 
+SELECT
     candidates.id,
     candidates.name, 
     candidates.telephone,
@@ -106,11 +106,11 @@ FROM
 LEFT JOIN grades 
 ON candidates.id = grades.id_candidate
 WHERE 
-	grades.interview >= valor
+    grades.interview >= valor
 AND 
-	grades.theory = valor
-OR 
-	grades.practice = valor
-OR 
-	grades.softSkill = valor
+    grades.theory >= valor
+AND 
+    grades.practice >= valor
+AND 
+    grades.softSkill >= valor;
 
