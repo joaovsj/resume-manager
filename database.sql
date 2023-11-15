@@ -1,116 +1,113 @@
-DROP DATABASE IF EXISTS resumes;
+-- phpMyAdmin SQL Dump
+-- version 5.2.0
+-- https://www.phpmyadmin.net/
+--
+-- Host: 127.0.0.1:3306
+-- Tempo de geração: 15-Nov-2023 às 15:29
+-- Versão do servidor: 8.0.31
+-- versão do PHP: 8.2.0
 
-CREATE DATABASE resumes;
-USE resumes;
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+START TRANSACTION;
+SET time_zone = "+00:00";
 
-CREATE TABLE candidates(
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
 
-	id INT PRIMARY KEY AUTO_INCREMENT,
-	name VARCHAR(255),
-	telephone BIGINT(14),
-	description VARCHAR(255)
-);
+--
+-- Banco de dados: `resumes`
+--
+CREATE DATABASE IF NOT EXISTS `resumes` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci;
+USE `resumes`;
 
+-- --------------------------------------------------------
 
-CREATE TABLE grades(
-	id INT PRIMARY KEY AUTO_INCREMENT,	
-	interview INT(2),
-	theory INT(2),
-	practice INT(2),
-	softSkill INT(2),
-	id_candidate INT,
-	FOREIGN KEY(id_candidate) REFERENCES candidates(id)
-);
+--
+-- Estrutura da tabela `candidates`
+--
 
-/*
-	REGISTERS
-*/
+DROP TABLE IF EXISTS `candidates`;
+CREATE TABLE IF NOT EXISTS `candidates` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) DEFAULT NULL,
+  `telephone` bigint DEFAULT NULL,
+  `description` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=21 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
-insert into candidates (name, telephone, description) values ('Becky Peegrem', '2317857230', 'dignissim vestibulum vestibulum ante ipsum');
-insert into candidates (name, telephone, description) values ('Gracia Lygoe', '2114995032', 'a ipsum integer a nibh ');
-insert into candidates (name, telephone, description) values ('Jasmin Hastings', '4516675712', 'aenean sit amet justo morbi ut');
-insert into candidates (name, telephone, description) values ('Nessy Bagenal', '6051260676', 'sit amet sem fusce consequat nulla nisl nunc nisl');
-insert into candidates (name, telephone, description) values ('Randal Blything', '42416682020', 'pede lobortis ligula sit amet');
-insert into candidates (name, telephone, description) values ('Cedric Chinge', '7113059606', 'rhoncus aliquet pulvinar ');
-insert into candidates (name, telephone, description) values ('Boone Gotcliff', '48425660709', 'nibh ligula nec sem duis ');
-insert into candidates (name, telephone, description) values ('Osbourn Defraine', '98489386349', 'orci pede venenatis non ');
-insert into candidates (name, telephone, description) values ('Giffard Robard', '28499378739', 'elementum in hac habitasse');
-insert into candidates (name, telephone, description) values ('Arron Stuckford', '61468525649', 'auctor sed tristique in ');
-insert into candidates (name, telephone, description) values ('Kalli Seggie', '93436902509', 'luctus et ultrices posuere ');
-insert into candidates (name, telephone, description) values ('Dewie Allaway', '254627414', 'fusce congue diam id ornare ');
-insert into candidates (name, telephone, description) values ('Mellie Canadas', '11499541509', 'lobortis convallis tortor ');
-insert into candidates (name, telephone, description) values ('Norrie Oherlihy', '20467916459', 'morbi ut odio cras mi pede');
-insert into candidates (name, telephone, description) values ('Allsun Drysdall', '74435171659', 'dolor vel est donec odio ');
-insert into candidates (name, telephone, description) values ('Douglass Cooke', '14439334189', 'bibendum felis sed interdum');
-insert into candidates (name, telephone, description) values ('Zsa zsa Cannavan', '42474039979', 'enim in tempor turpis nec');
-insert into candidates (name, telephone, description) values ('Kristal Gurley', '34413616399', 'sit amet turpis elementum ');
-insert into candidates (name, telephone, description) values ('Caritta Sealeaf', '69434603969', 'nisl nunc rhoncus dui vel');
-insert into candidates (name, telephone, description) values ('Jodi Sappson', '23451662069', 'tincidunt in leo maecenas ');
+--
+-- Extraindo dados da tabela `candidates`
+--
 
-insert into grades (interview, theory, practice, softSkill, id_candidate ) values (12, 8, 8, 1, 1);
-insert into grades (interview, theory, practice, softSkill, id_candidate ) values (8, 8, 14, 18, 2);
-insert into grades (interview, theory, practice, softSkill, id_candidate ) values (19, 20, 11, 6, 3);
-insert into grades (interview, theory, practice, softSkill, id_candidate ) values (18, 10, 5, 15, 4);
-insert into grades (interview, theory, practice, softSkill, id_candidate ) values (7, 8, 4, 7, 5);
-insert into grades (interview, theory, practice, softSkill, id_candidate ) values (14, 4, 17, 15, 6);
-insert into grades (interview, theory, practice, softSkill, id_candidate ) values (10, 7, 17, 12, 7);
-insert into grades (interview, theory, practice, softSkill, id_candidate ) values (11, 7, 16, 11, 8);
-insert into grades (interview, theory, practice, softSkill, id_candidate ) values (17, 16, 11, 17, 9);
-insert into grades (interview, theory, practice, softSkill, id_candidate ) values (17, 12, 19, 17, 10);
-insert into grades (interview, theory, practice, softSkill, id_candidate ) values (12, 20, 5, 20, 11);
-insert into grades (interview, theory, practice, softSkill, id_candidate ) values (14, 6, 12, 20, 12);
-insert into grades (interview, theory, practice, softSkill, id_candidate ) values (13, 11, 15, 11, 13);
-insert into grades (interview, theory, practice, softSkill, id_candidate ) values (1, 16, 11, 18, 14);
-insert into grades (interview, theory, practice, softSkill, id_candidate ) values (15, 10, 16, 10, 15);
-insert into grades (interview, theory, practice, softSkill, id_candidate ) values (13, 16, 8, 17, 16);
-insert into grades (interview, theory, practice, softSkill, id_candidate ) values (9, 7, 16, 14, 17);
-insert into grades (interview, theory, practice, softSkill, id_candidate ) values (12, 7, 5, 19, 18);
-insert into grades (interview, theory, practice, softSkill, id_candidate ) values (1, 20, 2, 1, 19);
-insert into grades (interview, theory, practice, softSkill, id_candidate ) values (18, 1, 16, 18, 20);
+INSERT INTO `candidates` (`id`, `name`, `telephone`, `description`) VALUES
+(1, 'Becky Peegrem', 2317857230, 'dignissim vestibulum vestibulum ante ipsum'),
+(2, 'Gracia Lygoe', 2114995032, 'a ipsum integer a nibh '),
+(3, 'Jasmin Hastings', 4516675712, 'aenean sit amet justo morbi ut'),
+(4, 'Nessy Bagenal', 6051260676, 'sit amet sem fusce consequat nulla nisl nunc nisl'),
+(5, 'Randal Blything', 42416682020, 'pede lobortis ligula sit amet'),
+(6, 'Cedric Chinge', 7113059606, 'rhoncus aliquet pulvinar '),
+(7, 'Boone Gotcliff', 48425660709, 'nibh ligula nec sem duis '),
+(8, 'Osbourn Defraine', 98489386349, 'orci pede venenatis non '),
+(9, 'Giffard Robard', 28499378739, 'elementum in hac habitasse'),
+(10, 'Arron Stuckford', 61468525649, 'auctor sed tristique in '),
+(11, 'Kalli Seggie', 93436902509, 'luctus et ultrices posuere '),
+(12, 'Dewie Allaway', 254627414, 'fusce congue diam id ornare '),
+(13, 'Mellie Canadas', 11499541509, 'lobortis convallis tortor '),
+(14, 'Norrie Oherlihy', 20467916459, 'morbi ut odio cras mi pede'),
+(15, 'Allsun Drysdall', 74435171659, 'dolor vel est donec odio '),
+(16, 'Douglass Cooke', 14439334189, 'bibendum felis sed interdum'),
+(17, 'Zsa zsa Cannavan', 42474039979, 'enim in tempor turpis nec'),
+(18, 'Kristal Gurley', 34413616399, 'sit amet turpis elementum '),
+(19, 'Caritta Sealeaf', 69434603969, 'nisl nunc rhoncus dui vel'),
+(20, 'Jodi Sappson', 23451662069, 'tincidunt in leo maecenas ');
 
+-- --------------------------------------------------------
 
+--
+-- Estrutura da tabela `grades`
+--
 
-/*
-	GET METHOD 
-*/
+DROP TABLE IF EXISTS `grades`;
+CREATE TABLE IF NOT EXISTS `grades` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `interview` int DEFAULT NULL,
+  `theory` int DEFAULT NULL,
+  `practice` int DEFAULT NULL,
+  `softSkill` int DEFAULT NULL,
+  `id_candidate` int DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `id_candidate` (`id_candidate`)
+) ENGINE=MyISAM AUTO_INCREMENT=21 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
-SELECT 
-    candidates.id,
-    candidates.name, 
-    candidates.telephone,
-    candidates.description,
-    grades.interview, 
-    grades.theory, 
-    grades.practice, 
-    grades.softSkill 
-FROM 
-    candidates 
-LEFT JOIN grades 
-ON candidates.id = grades.id_candidate;
+--
+-- Extraindo dados da tabela `grades`
+--
 
+INSERT INTO `grades` (`id`, `interview`, `theory`, `practice`, `softSkill`, `id_candidate`) VALUES
+(1, 5, 4, 5, 5, 1),
+(2, 3, 8, 4, 2, 2),
+(3, 1, 6, 10, 9, 3),
+(4, 2, 6, 9, 4, 4),
+(5, 4, 10, 4, 5, 5),
+(6, 6, 1, 1, 9, 6),
+(7, 10, 1, 7, 6, 7),
+(8, 8, 5, 9, 1, 8),
+(9, 7, 7, 4, 7, 9),
+(10, 10, 3, 6, 1, 10),
+(11, 6, 4, 9, 2, 11),
+(12, 5, 6, 5, 3, 12),
+(13, 3, 4, 8, 9, 13),
+(14, 6, 9, 7, 5, 14),
+(15, 7, 9, 2, 3, 15),
+(16, 1, 9, 3, 4, 16),
+(17, 9, 9, 2, 10, 17),
+(18, 5, 7, 3, 2, 18),
+(19, 9, 7, 8, 10, 19),
+(20, 3, 4, 5, 4, 20);
+COMMIT;
 
-/*
-	WHEN GET METHOD HAS PARAMETERS
-*/
-SELECT
-    candidates.id,
-    candidates.name, 
-    candidates.telephone,
-    candidates.description,
-    grades.interview, 
-    grades.theory, 
-    grades.practice, 
-    grades.softSkill 
-FROM 
-    candidates 
-LEFT JOIN grades 
-ON candidates.id = grades.id_candidate
-WHERE 
-    grades.interview >= valor
-AND 
-    grades.theory >= valor
-AND 
-    grades.practice >= valor
-AND 
-    grades.softSkill >= valor;
-
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
