@@ -32,7 +32,7 @@ DROP TABLE IF EXISTS `candidates`;
 CREATE TABLE IF NOT EXISTS `candidates` (
   `id` int NOT NULL AUTO_INCREMENT,
   `name` varchar(255) DEFAULT NULL,
-  `telephone` bigint DEFAULT NULL,
+  `telephone` VARCHAR(20) DEFAULT NULL,
   `description` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM AUTO_INCREMENT=21 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
