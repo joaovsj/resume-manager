@@ -24,14 +24,18 @@ class Transaction():
     #  insere um valor no banco
     def insert(self, name, telephone, description, interview, theory, practice, softSkill):        
 
-        command = f"INSERT INTO candidates (name, telephone, description) VALUES ('{name}', '{telephone}', '{description}')"
-        cursor.execute(command)
-        candidate_id = cursor.lastrowid
-        self.save()
+        if name == "" or telephone == "" or description == "" or interview == "" or theory == "" or practice == "" or softSkill == "":
+            return False
+        else:     
 
-        command = f"INSERT INTO grades (interview, theory, practice, softSkill, id_candidate) VALUES ('{interview}', '{theory}', '{practice}', '{softSkill}', {candidate_id})"
-        cursor.execute(command)
-        self.save()
+            command = f"INSERT INTO candidates (name, telephone, description) VALUES ('{name}', '{telephone}', '{description}')"
+            cursor.execute(command)
+            candidate_id = cursor.lastrowid
+            self.save()
+
+            command = f"INSERT INTO grades (interview, theory, practice, softSkill, id_candidate) VALUES ('{interview}', '{theory}', '{practice}', '{softSkill}', {candidate_id})"
+            cursor.execute(command)
+            self.save()
         
     # pega todos dados referente pesquisa 
     def selectSearch(self, interview, theory, practice, softSkill):
@@ -176,8 +180,12 @@ class Screen(Transaction, PDF):
         practiceRegister = self.practice.get("1.0", "end-1c")
         softSkillRegister = self.softSkill.get("1.0", "end-1c")
 
-        self.insert(nameRegister, telephoneRegister, descriptionRegister, interviewRegister, theoryRegister, practiceRegister, softSkillRegister)
-        self.message("Cadastro realizado com sucesso!")
+        response = self.insert(nameRegister, telephoneRegister, descriptionRegister, interviewRegister, theoryRegister, practiceRegister, softSkillRegister)
+
+        if response == False:
+            self.message("Preencha todos os campos!")
+        else:
+            self.message("Cadastro realizado com sucesso!")
 
     # exibi uma mensagem(texto a ser exibido)
     def message(self, subject):
